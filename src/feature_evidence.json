@@ -1,0 +1,163 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-single-page-literary-portal-named-amar-ghumontovilla-with-top-navigation-and-five-sections-home-poems-stories-essays-and-contact-navigation-must-switch-the-visible-section-without-a-full-page-reload-and-must-visually-indicate-the-active-section",
+      "featureTitle": "Create a single-page literary portal named “Amar Ghumontovilla” with top navigation and five sections: Home, Poems, Stories, Essays, and Contact. Navigation must switch the visible section without a full page reload and must visually indicate the active section.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/TopNav.tsx",
+        "frontend/src/main.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-consistent-hero-banner-at-the-top-of-each-section-containing-a-floral-image-and-a-section-title-matching-the-structure-in-the-provided-html-hero-image-heading",
+      "featureTitle": "Implement a consistent “hero” banner at the top of each section containing a floral image and a section title, matching the structure in the provided HTML (hero image + heading).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/SectionHero.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-per-section-comments-for-home-poems-stories-and-essays-each-section-must-display-a-comment-form-textarea-submit-and-a-list-of-submitted-comments-for-that-section-comments-must-be-persisted-on-the-backend-and-loaded-on-page-visit-refresh",
+      "featureTitle": "Add per-section comments for Home, Poems, Stories, and Essays: each section must display a comment form (textarea + submit) and a list of submitted comments for that section. Comments must be persisted on the backend and loaded on page visit/refresh.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/CommentsSection.tsx",
+        "frontend/src/hooks/useSectionComments.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-contact-section-to-display-the-email-address-contact-amarghumontovilla-in-and-provide-a-contact-form-with-name-email-and-message-fields-plus-a-send-button-submissions-must-be-persisted-on-the-backend-store-messages-and-the-ui-must-show-a-clear-success-state-after-submit",
+      "featureTitle": "Implement the Contact section to display the email address “contact@amarghumontovilla.in” and provide a contact form with Name, Email, and Message fields plus a Send button. Submissions must be persisted on the backend (store messages) and the UI must show a clear success state after submit.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ContactSection.tsx",
+        "frontend/src/hooks/useContactForm.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-on-page-translation-widget-placeholder-container-with-id-google-translate-element-and-integrate-google-translate-element-loading-on-the-frontend-so-the-widget-renders-in-the-ui",
+      "featureTitle": "Add an on-page translation widget placeholder container with id \"google_translate_element\" and integrate Google Translate element loading on the frontend so the widget renders in the UI.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/TranslateWidget.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-configure-seo-and-social-metadata-for-the-app-equivalent-to-the-provided-html-title-meta-description-keywords-author-open-graph-title-description-image-url-and-canonical-url-for-https-www-amarghumontovilla-in",
+      "featureTitle": "Configure SEO and social metadata for the app equivalent to the provided HTML: title, meta description, keywords, author, Open Graph (title/description/image/url), and canonical URL for https://www.amarghumontovilla.in.",
+      "files": [
+        "frontend/index.html"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-coherent-nature-inspired-floral-visual-theme-across-the-app-color-palette-typography-spacing-buttons-form-styling-with-a-calm-editorial-feel-suitable-for-reading-long-form-text-ensure-it-is-consistently-applied-to-navigation-hero-content-and-forms",
+      "featureTitle": "Apply a coherent, nature-inspired floral visual theme across the app (color palette, typography, spacing, buttons, form styling) with a calm editorial feel suitable for reading long-form text; ensure it is consistently applied to navigation, hero, content, and forms.",
+      "files": [
+        "frontend/src/components/CommentsSection.tsx",
+        "frontend/src/components/ContactSection.tsx",
+        "frontend/src/components/TopNav.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-generate-and-include-required-static-images-in-the-app-under-frontend-public-assets-generated-and-use-them-in-the-ui-hero-image-and-optional-background-pattern-instead-of-hotlinking-external-images",
+      "featureTitle": "Generate and include required static images in the app under frontend/public/assets/generated and use them in the UI (hero image and optional background pattern) instead of hotlinking external images.",
+      "files": [
+        "frontend/index.html",
+        "frontend/src/components/SectionHero.tsx",
+        "frontend/src/index.css"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

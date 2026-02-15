@@ -1,0 +1,21 @@
+{
+  "backend/main.mo": "Motoko canister storing per-section comments and contact messages with add and query methods, using lists and timestamp sorting.",
+  "feature_evidence.json": "Feature evidence report mapping implemented features to source files, components, and test IDs with confidence levels.",
+  "frontend-file-summaries.txt": "Prewritten summaries describing the purpose of each frontend source file in the project.",
+  "frontend/index.css": "Tailwind base and theme variables defining light/dark floral-inspired color palettes and global styles.",
+  "frontend/index.html": "Main HTML entry with Bengali metadata, SEO tags, Open Graph data, and script mount point.",
+  "frontend/src/App.tsx": "Root SPA component handling navigation between sections and rendering heroes, content, comments, and contact UI.",
+  "frontend/src/components/CommentsSection.tsx": "UI component for per-section comment form and list with submission handling and success feedback.",
+  "frontend/src/components/ContactSection.tsx": "Contact form component with email validation and submission via useContactForm, plus a static email display.",
+  "frontend/src/components/SectionHero.tsx": "Hero section displaying a background image with title, optional subtitle, and description.",
+  "frontend/src/components/TopNav.tsx": "Top navigation bar with desktop and mobile menus, section switching, and scroll-to-top behavior.",
+  "frontend/src/components/TranslateWidget.tsx": "Loads and initializes Google Translate widget and mounts it at a fixed screen position.",
+  "frontend/src/hooks/useActor.ts": "Creates and manages an authenticated or anonymous backend actor, refetching dependent queries when identity changes.",
+  "frontend/src/hooks/useContactForm.ts": "Handles contact message submission through the actor and tracks success and submission state.",
+  "frontend/src/hooks/useInternetIdentity.ts": "Provides Internet Identity auth context, loading stored identity, enabling login/logout, and exposing login status.",
+  "frontend/src/hooks/useSectionComments.ts": "Fetches and posts comments for a specific content section using the backend actor and react-query.",
+  "frontend/src/index.css": "Tailwind-based global stylesheet defining themes, fonts, and utility layers with floral-inspired color variables.",
+  "frontend/src/main.tsx": "App entry point initializing React, InternetIdentityProvider, and react-query client.",
+  "frontend/tailwind.config.js": "Configures Tailwind with dark mode, custom color tokens, fonts, radii, shadows, keyframes, and plugins for typography, container queries, and animations.",
+  "project_state.json": "Defines the project’s current state, including features, architecture notes, image requirements, and metadata for the Bengali literary portal Amar Ghumontovilla."
+}
