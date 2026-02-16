@@ -61,10 +61,10 @@ export default function ContactSection() {
             <Mail className="text-primary" size={24} />
             <span className="font-medium">Email:</span>
             <a 
-              href="mailto:contact@amarghumontovilla.in" 
+              href="mailto:shovangoswami6@gmail.com" 
               className="text-primary hover:underline font-semibold"
             >
-              contact@amarghumontovilla.in
+              shovangoswami6@gmail.com
             </a>
           </div>
         </CardContent>

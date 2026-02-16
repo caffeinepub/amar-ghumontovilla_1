@@ -1,180 +1,60 @@
 {
   "kind": "build_request",
-  "title": "Build Amar Ghumontovilla literary portal with sections, comments, contact form, SEO, and floral theme",
+  "title": "Add provided Bengali story to Stories section and update contact email address",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Create a single-page literary portal named “Amar Ghumontovilla” with top navigation and five sections: Home, Poems, Stories, Essays, and Contact. Navigation must switch the visible section without a full page reload and must visually indicate the active section.",
+      "text": "Replace the placeholder content in the Stories (গল্প) section with the provided story, using the exact Bengali title “আশ্রয়হীন” and the full provided Bengali story body text.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-1",
+          "msg-2"
         ],
         "quotes": [
-          "<li><a href=\"#\" onclick=\"showSection('home')\">Home</a></li>\n                <li><a href=\"#\" onclick=\"showSection('poems')\">আমার কবিতা</a></li>\n                <li><a href=\"#\" onclick=\"showSection('stories')\">গল্প</a></li>\n                <li><a href=\"#\" onclick=\"showSection('essays')\">প্রবন্ধ</a></li>\n                <li><a href=\"#\" onclick=\"showSection('contact')\">Contact</a></li>"
+          "গল্পের যেই বিভাগ আছে সেখানে এই গল্পটি দিন। গল্পের শিরোনাম - আশ্রয়হীন।",
+          "Yes, make changes and add the story properly that I will gave you the previous day."
         ]
       },
       "acceptanceCriteria": [
-        "A header nav is present on all views with links for Home/Poems/Stories/Essays/Contact.",
-        "Clicking a nav item shows the corresponding section content and hides the others without refreshing the page.",
-        "The currently selected section is clearly highlighted."
+        "When navigating to the Stories/গল্প section, the article title displays exactly as “আশ্রয়হীন”.",
+        "The story body text is rendered in full and matches the user-provided Bengali text (no omissions or edits).",
+        "The story is formatted for readability (e.g., paragraph breaks preserved; no collapsed single-block text).",
+        "The existing Stories section comments component remains present and functional."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Implement a consistent “hero” banner at the top of each section containing a floral image and a section title, matching the structure in the provided HTML (hero image + heading).",
+      "text": "Update the Contact section’s displayed email address and mailto link to use the new email: shovangoswami6@gmail.com.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-1"
         ],
         "quotes": [
-          "<div class=\"hero\">\n                <img src=\"images/flower-bouquet.jpg\" alt=\"Flower Bouquet - Floral Hero Image\" class=\"hero-image\">\n                <h2>Welcome to Amar Ghumontovilla</h2>\n                <p>A serene space for literary exploration amidst nature's beauty.</p>\n            </div>"
+          "Change the mail id - shovangoswami6@gmail.com"
         ]
       },
       "acceptanceCriteria": [
-        "Each section starts with a hero area that includes a static floral image and a title.",
-        "The hero layout is consistent across sections and responsive on mobile and desktop."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Add per-section comments for Home, Poems, Stories, and Essays: each section must display a comment form (textarea + submit) and a list of submitted comments for that section. Comments must be persisted on the backend and loaded on page visit/refresh.",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "<div id=\"comments-home\" class=\"comments-section\">\n                <h3>Comments</h3>\n                <form id=\"comment-form-home\">\n                    <textarea placeholder=\"Leave a comment...\" required></textarea>\n                    <button type=\"submit\">Submit</button>\n                </form>\n                <div class=\"comments-list\"></div>\n            </div>"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Each of the four sections (Home/Poems/Stories/Essays) shows a comments area with a form and a list.",
-        "Submitting a comment adds it to the correct section list immediately and persists it in the canister.",
-        "Reloading the app shows previously submitted comments in the correct section.",
-        "Basic validation prevents submitting empty comments."
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Implement the Contact section to display the email address “contact@amarghumontovilla.in” and provide a contact form with Name, Email, and Message fields plus a Send button. Submissions must be persisted on the backend (store messages) and the UI must show a clear success state after submit.",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "<p>Email: contact@amarghumontovilla.in</p>\n                <form id=\"contact-form\">\n                    <input type=\"text\" placeholder=\"Name\" required>\n                    <input type=\"email\" placeholder=\"Email\" required>\n                    <textarea placeholder=\"Message\" required></textarea>\n                    <button type=\"submit\">Send</button>\n                </form>"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The Contact section displays the email address exactly as provided.",
-        "The contact form validates required fields and basic email format.",
-        "Submitting the form stores the message in the backend and shows a success confirmation in the UI.",
-        "The form is cleared (or disabled) after a successful send to prevent duplicate submissions by mistake."
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Add an on-page translation widget placeholder container with id \"google_translate_element\" and integrate Google Translate element loading on the frontend so the widget renders in the UI.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "<div id=\"google_translate_element\"></div>\n    <script src=\"https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit\"></script>"
-        ]
-      },
-      "acceptanceCriteria": [
-        "A \"google_translate_element\" container exists in the rendered app.",
-        "The Google Translate script is loaded on the client and the widget renders (when accessible) without breaking the app if it fails to load."
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "text": "Configure SEO and social metadata for the app equivalent to the provided HTML: title, meta description, keywords, author, Open Graph (title/description/image/url), and canonical URL for https://www.amarghumontovilla.in.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "<meta name=\"description\" content=\"আমার ঘুমন্ত ভিলা: A personal blog for literary works including poems, stories, and essays in Bengali, with a nature-inspired floral aesthetic.\">\n    <meta name=\"keywords\" content=\"Bengali literature, poems, stories, essays, floral blog, Amar Ghumontovilla\">\n    <meta name=\"author\" content=\"Amar Ghumontovilla\">\n    <meta property=\"og:title\" content=\"আমার ঘুমন্ত ভিলা\">\n    <meta property=\"og:description\" content=\"Explore literary works in a secure, nature-inspired portal.\">\n    <meta property=\"og:image\" content=\"https://www.amarghumontovilla.in/images/flower-bouquet.jpg\">\n    <meta property=\"og:url\" content=\"https://www.amarghumontovilla.in\">\n    <link rel=\"canonical\" href=\"https://www.amarghumontovilla.in\">"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The built app sets the document title and includes meta tags for description/keywords/author.",
-        "Open Graph tags for title/description/image/url are present.",
-        "A canonical link tag exists for https://www.amarghumontovilla.in."
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "text": "Apply a coherent, nature-inspired floral visual theme across the app (color palette, typography, spacing, buttons, form styling) with a calm editorial feel suitable for reading long-form text; ensure it is consistently applied to navigation, hero, content, and forms.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "meta name=\"description\" content=\"... with a nature-inspired floral aesthetic.\""
-        ]
-      },
-      "acceptanceCriteria": [
-        "The UI has a consistent floral/nature-inspired theme and readable typography for long text.",
-        "Forms, buttons, navigation, and section layouts share consistent styling.",
-        "The theme works well on mobile and desktop and maintains good text contrast."
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "text": "Generate and include required static images in the app under frontend/public/assets/generated and use them in the UI (hero image and optional background pattern) instead of hotlinking external images.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "<img src=\"images/flower-bouquet.jpg\" alt=\"Flower Bouquet - Floral Hero Image\" class=\"hero-image\">",
-          "<meta property=\"og:image\" content=\"https://www.amarghumontovilla.in/images/flower-bouquet.jpg\">"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Newly generated image assets exist under frontend/public/assets/generated.",
-        "The hero banner uses the generated floral image from local static assets.",
-        "OG image metadata points to the correct deployed static image path (not a placeholder)."
+        "The Contact section shows “shovangoswami6@gmail.com” as the email text.",
+        "Clicking the email opens a mailto link targeting “shovangoswami6@gmail.com”.",
+        "No remaining UI text in the Contact section references the old email address."
       ]
     }
   ],
   "constraints": [
-    "Backend must remain a single Motoko actor (no additional backend services).",
-    "Do not edit files under frontend/src/components/ui or other immutable paths listed by the platform; compose them instead.",
-    "Do not add third-party authentication providers; only Internet Identity is allowed if authentication is later needed.",
-    "Do not rely on external databases or non-IC hosting services for persistence."
+    "Do not edit files under frontend/src/components/ui (read-only).",
+    "Keep backend architecture as a single Motoko actor; do not introduce additional canisters/services.",
+    "Use English for any new user-facing UI text added as part of these changes (story text remains Bengali as provided)."
   ],
   "nonGoals": [
-    "Implementing an admin dashboard or authoring workflow for adding/editing poems, stories, or essays.",
-    "User accounts, moderation tools, spam prevention, or CAPTCHA for comments/contact forms.",
-    "Real-time updates (WebSockets) for comments or contact messages."
+    "Do not implement a new content management/upload system.",
+    "Do not change comment storage behavior or contact form submission behavior beyond updating the displayed email address.",
+    "Do not change SEO metadata unless explicitly required for the email update."
   ],
   "imageRequirements": {
-    "required": [
-      "Floral bouquet hero photograph/illustration with soft natural lighting (flower-bouquet-hero.dim_1920x800.png)",
-      "Seamless subtle floral pattern background texture, low contrast (floral-pattern-bg.dim_1024x1024.png)"
-    ],
+    "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

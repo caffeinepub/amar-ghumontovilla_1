@@ -1,218 +1,38 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Amar Ghumontovilla single-page literary portal (sections, comments, contact, translate, SEO, floral theme)",
+  "title": "Update Stories content with Bengali story and refresh contact email",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Implement a single-page app shell with top navigation that switches between Home/Poems/Stories/Essays/Contact sections and highlights the active section.",
+      "summary": "Replace the Stories (গল্প) placeholder article with the provided Bengali story titled “আশ্রয়হীন”, preserving full body text and readable paragraph formatting while keeping the existing comments component intact.",
       "acceptanceCriteria": [
-        "A header nav is present on all views with links for Home/Poems/Stories/Essays/Contact.",
-        "Clicking a nav item shows the corresponding section content and hides the others without refreshing the page.",
-        "The currently selected section is clearly highlighted."
+        "When navigating to the Stories/গল্প section, the article title displays exactly as “আশ্রয়হীন”.",
+        "The story body text is rendered in full and matches the user-provided Bengali text (no omissions or edits).",
+        "The story is formatted for readability (e.g., paragraph breaks preserved; no collapsed single-block text).",
+        "The existing Stories section comments component remains present and functional."
       ],
       "file_operations": [
         {
           "path": "frontend/src/App.tsx",
-          "operation": "create",
-          "description": "Create the main single-page layout with a sticky/top header navigation, internal section switching (React state), and active-section styling. Use shadcn-ui primitives (e.g., Button) where appropriate for consistent nav interaction; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/TopNav.tsx",
-          "operation": "create",
-          "description": "Add a dedicated TopNav component that renders the five section links and applies an active state based on the current section. Use shadcn-ui components (e.g., Button) for accessible interactive controls; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/main.tsx",
           "operation": "modify",
-          "description": "Ensure the app renders the new App component entry (and any providers needed for section state/hooks) without adding page reload navigation."
+          "description": "In the Stories section UI, replace “Sample Story Title” with the exact Bengali title “আশ্রয়হীন” and replace the placeholder paragraphs with the full user-provided Bengali story body text. Implement rendering that preserves paragraph breaks for readability (e.g., render from a multi-line string without trimming/rewrapping the content). Ensure the existing <CommentsSection section=\"stories\" /> remains present and wired exactly as before."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Add a consistent responsive hero banner for each section with a floral image and the section title (hero image + heading structure).",
+      "summary": "Update the Contact section email display and mailto link to shovangoswami6@gmail.com.",
       "acceptanceCriteria": [
-        "Each section starts with a hero area that includes a static floral image and a title.",
-        "The hero layout is consistent across sections and responsive on mobile and desktop."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/SectionHero.tsx",
-          "operation": "create",
-          "description": "Create a reusable SectionHero component that renders the generated floral hero image plus section title (and optional subtitle) with consistent spacing and responsive behavior. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Wire SectionHero into each section (Home/Poems/Stories/Essays/Contact) so the hero appears at the top of each section consistently."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Implement per-section comments UI for Home/Poems/Stories/Essays with form + list, using backend-backed loading and submission with validation.",
-      "acceptanceCriteria": [
-        "Each of the four sections (Home/Poems/Stories/Essays) shows a comments area with a form and a list.",
-        "Submitting a comment adds it to the correct section list immediately and persists it in the canister.",
-        "Reloading the app shows previously submitted comments in the correct section.",
-        "Basic validation prevents submitting empty comments."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/CommentsSection.tsx",
-          "operation": "create",
-          "description": "Create a reusable comments component (textarea + submit + list) parameterized by section, with empty-comment validation, optimistic UI update, and error handling. Use shadcn-ui form primitives (e.g., Textarea, Button, Card) for consistent styling; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/hooks/useSectionComments.ts",
-          "operation": "create",
-          "description": "Add a React Query-based hook to load and submit comments per section by calling the existing backend interface methods (get*Comments/add*Comment) and keeping cached lists in sync."
-        },
-        {
-          "path": "frontend/src/backend.ts",
-          "operation": "create",
-          "description": "Provide a typed frontend backend client wrapper that exposes the existing backend interface to the UI (used by comments/contact hooks), aligning with the project's core-infrastructure connection patterns."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Render CommentsSection within Home/Poems/Stories/Essays sections (and not in Contact) and pass the correct section key so each section reads/writes its own persisted comments."
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Implement Contact section with email display and a validated Name/Email/Message form that persists submissions via backend and shows a clear success state.",
-      "acceptanceCriteria": [
-        "The Contact section displays the email address exactly as provided.",
-        "The contact form validates required fields and basic email format.",
-        "Submitting the form stores the message in the backend and shows a success confirmation in the UI.",
-        "The form is cleared (or disabled) after a successful send to prevent duplicate submissions by mistake."
+        "The Contact section shows “shovangoswami6@gmail.com” as the email text.",
+        "Clicking the email opens a mailto link targeting “shovangoswami6@gmail.com”.",
+        "No remaining UI text in the Contact section references the old email address."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/ContactSection.tsx",
-          "operation": "create",
-          "description": "Create the Contact section UI: render the email address (contact@amarghumontovilla.in) and a form with Name/Email/Message + Send button, including required-field checks and basic email format validation. Use shadcn-ui Input/Textarea/Button and optionally Alert for success messaging; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/hooks/useContactForm.ts",
-          "operation": "create",
-          "description": "Implement submission logic (React Query mutation) calling addContactMessage, handling pending/success/error states, and clearing/disabling the form on success."
-        },
-        {
-          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Wire ContactSection into the Contact section panel so it is shown when Contact is active and hidden otherwise."
-        }
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "summary": "Add a Google Translate widget container and client-side script loader that renders the widget when available without breaking if it fails.",
-      "acceptanceCriteria": [
-        "A \"google_translate_element\" container exists in the rendered app.",
-        "The Google Translate script is loaded on the client and the widget renders (when accessible) without breaking the app if it fails to load."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/TranslateWidget.tsx",
-          "operation": "create",
-          "description": "Create a TranslateWidget component that renders a container with id \"google_translate_element\" and injects the Google Translate element script on the client with guarded initialization and failure-safe behavior."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Place TranslateWidget in the app chrome (e.g., header area) so it is present in the rendered UI without introducing additional routes/pages."
-        }
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "summary": "Configure SEO and social metadata: title, meta description/keywords/author, Open Graph tags, and canonical URL for https://www.amarghumontovilla.in.",
-      "acceptanceCriteria": [
-        "The built app sets the document title and includes meta tags for description/keywords/author.",
-        "Open Graph tags for title/description/image/url are present.",
-        "A canonical link tag exists for https://www.amarghumontovilla.in."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Add/ensure meta tags for description, keywords, author; Open Graph tags (title/description/image/url); and canonical link for https://www.amarghumontovilla.in. Set og:image to the deployed static asset URL corresponding to the generated hero image (served from the public assets)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "summary": "Apply a calm, nature-inspired floral theme (palette, typography, spacing, buttons/forms) consistently across navigation, hero, content, and forms with good readability.",
-      "acceptanceCriteria": [
-        "The UI has a consistent floral/nature-inspired theme and readable typography for long text.",
-        "Forms, buttons, navigation, and section layouts share consistent styling.",
-        "The theme works well on mobile and desktop and maintains good text contrast."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "create",
-          "description": "Establish global theme tokens (CSS variables compatible with the existing Tailwind/shadcn-ui setup), base typography for long-form reading, and global layout/background styling that supports the floral aesthetic."
-        },
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Extend Tailwind theme configuration (typography, colors, spacing as needed) to support the editorial floral theme consistently across components."
-        },
-        {
-          "path": "frontend/src/components/TopNav.tsx",
-          "operation": "modify",
-          "description": "Refine navigation styling for the floral theme (active highlight, spacing, responsiveness) while maintaining accessibility. If using shadcn-ui components, verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/CommentsSection.tsx",
-          "operation": "modify",
-          "description": "Align comments UI (form fields, buttons, list typography) with the global floral editorial theme. If using shadcn-ui components, verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/ContactSection.tsx",
-          "operation": "modify",
-          "description": "Align contact form controls and success state styling with the global floral editorial theme. If using shadcn-ui components, verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "summary": "Add required generated static images under frontend/public/assets/generated and use them for the hero image and optional background pattern; avoid external image hotlinking.",
-      "acceptanceCriteria": [
-        "Newly generated image assets exist under frontend/public/assets/generated.",
-        "The hero banner uses the generated floral image from local static assets.",
-        "OG image metadata points to the correct deployed static image path (not a placeholder)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/flower-bouquet-hero.dim_1920x800.png",
-          "operation": "create",
-          "description": "Add the generated floral bouquet hero image asset at frontend/public/assets/generated/flower-bouquet-hero.dim_1920x800.png for local usage in the UI."
-        },
-        {
-          "path": "frontend/public/assets/generated/floral-pattern-bg.dim_1024x1024.png",
-          "operation": "create",
-          "description": "Add the generated subtle seamless floral pattern background asset at frontend/public/assets/generated/floral-pattern-bg.dim_1024x1024.png for optional global background usage."
-        },
-        {
-          "path": "frontend/src/components/SectionHero.tsx",
-          "operation": "modify",
-          "description": "Update SectionHero to reference the local static hero image at frontend/public/assets/generated/flower-bouquet-hero.dim_1920x800.png (not an external URL)."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Apply the local background pattern at frontend/public/assets/generated/floral-pattern-bg.dim_1024x1024.png as an optional subtle page background (low contrast) consistent with the floral theme."
-        },
-        {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Ensure OG image metadata references the deployed URL corresponding to the local generated hero image (matching frontend/public/assets/generated/flower-bouquet-hero.dim_1920x800.png) rather than hotlinking external images."
+          "description": "Update the static email card to display “shovangoswami6@gmail.com” and change the anchor href to \"mailto:shovangoswami6@gmail.com\". Verify no other Contact section UI strings still reference the previous email address."
         }
       ]
     }

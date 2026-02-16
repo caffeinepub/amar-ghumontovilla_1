@@ -1,76 +1,24 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Build “আমার ঘুমন্ত ভিলা (Amar Ghumontovilla)”, a Bengali personal literary portal with nature/floral aesthetic featuring sections for Home, Poems, Stories, Essays, and Contact, including per-section comments, a contact form, and Google Translate widget.",
-  "architectural_notes": [
-    "Static site structure using HTML + external styles.css and script.js; section switching handled client-side.",
-    "Google Translate script loaded via translate.google.com with callback init."
-  ],
+  "summary": "Content-based app with a Stories section; needs content entry updates and contact email update.",
+  "architectural_notes": [],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Floral bouquet hero photograph/illustration with soft natural lighting (flower-bouquet-hero.dim_1920x800.png)\n- Seamless subtle floral pattern background texture, low contrast (floral-pattern-bg.dim_1024x1024.png)",
   "existing_features": [
     {
-      "id": "feature-create-a-single-page-literary-portal-named-amar-ghumontovilla-with-top-navigation-and-five-sections-home-poems-stories-essays-and-contact-navigation-must-switch-the-visible-section-without-a-full-page-reload-and-must-visually-indicate-the-active-section",
-      "title": "Create a single-page literary portal named “Amar Ghumontovilla” with top navigation and five sections: Home, Poems, Stories, Essays, and Contact. Navigation must switch the visible section without a full page reload and must visually indicate the active section.",
+      "id": "feature-replace-the-placeholder-content-in-the-stories-section-with-the-provided-story-using-the-exact-bengali-title-and-the-full-provided-bengali-story-body-text",
+      "title": "Replace the placeholder content in the Stories (গল্প) section with the provided story, using the exact Bengali title “আশ্রয়হীন” and the full provided Bengali story body text.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-implement-a-consistent-hero-banner-at-the-top-of-each-section-containing-a-floral-image-and-a-section-title-matching-the-structure-in-the-provided-html-hero-image-heading",
-      "title": "Implement a consistent “hero” banner at the top of each section containing a floral image and a section title, matching the structure in the provided HTML (hero image + heading).",
+      "id": "feature-update-the-contact-section-s-displayed-email-address-and-mailto-link-to-use-the-new-email-shovangoswami6-gmail-com",
+      "title": "Update the Contact section’s displayed email address and mailto link to use the new email: shovangoswami6@gmail.com.",
       "reqIds": [
         "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-per-section-comments-for-home-poems-stories-and-essays-each-section-must-display-a-comment-form-textarea-submit-and-a-list-of-submitted-comments-for-that-section-comments-must-be-persisted-on-the-backend-and-loaded-on-page-visit-refresh",
-      "title": "Add per-section comments for Home, Poems, Stories, and Essays: each section must display a comment form (textarea + submit) and a list of submitted comments for that section. Comments must be persisted on the backend and loaded on page visit/refresh.",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-the-contact-section-to-display-the-email-address-contact-amarghumontovilla-in-and-provide-a-contact-form-with-name-email-and-message-fields-plus-a-send-button-submissions-must-be-persisted-on-the-backend-store-messages-and-the-ui-must-show-a-clear-success-state-after-submit",
-      "title": "Implement the Contact section to display the email address “contact@amarghumontovilla.in” and provide a contact form with Name, Email, and Message fields plus a Send button. Submissions must be persisted on the backend (store messages) and the UI must show a clear success state after submit.",
-      "reqIds": [
-        "REQ-4"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-an-on-page-translation-widget-placeholder-container-with-id-google-translate-element-and-integrate-google-translate-element-loading-on-the-frontend-so-the-widget-renders-in-the-ui",
-      "title": "Add an on-page translation widget placeholder container with id \"google_translate_element\" and integrate Google Translate element loading on the frontend so the widget renders in the UI.",
-      "reqIds": [
-        "REQ-5"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-configure-seo-and-social-metadata-for-the-app-equivalent-to-the-provided-html-title-meta-description-keywords-author-open-graph-title-description-image-url-and-canonical-url-for-https-www-amarghumontovilla-in",
-      "title": "Configure SEO and social metadata for the app equivalent to the provided HTML: title, meta description, keywords, author, Open Graph (title/description/image/url), and canonical URL for https://www.amarghumontovilla.in.",
-      "reqIds": [
-        "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-apply-a-coherent-nature-inspired-floral-visual-theme-across-the-app-color-palette-typography-spacing-buttons-form-styling-with-a-calm-editorial-feel-suitable-for-reading-long-form-text-ensure-it-is-consistently-applied-to-navigation-hero-content-and-forms",
-      "title": "Apply a coherent, nature-inspired floral visual theme across the app (color palette, typography, spacing, buttons, form styling) with a calm editorial feel suitable for reading long-form text; ensure it is consistently applied to navigation, hero, content, and forms.",
-      "reqIds": [
-        "REQ-7"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-generate-and-include-required-static-images-in-the-app-under-frontend-public-assets-generated-and-use-them-in-the-ui-hero-image-and-optional-background-pattern-instead-of-hotlinking-external-images",
-      "title": "Generate and include required static images in the app under frontend/public/assets/generated and use them in the UI (hero image and optional background pattern) instead of hotlinking external images.",
-      "reqIds": [
-        "REQ-8"
       ],
       "version": 1
     }
@@ -78,43 +26,19 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Multi-section literary site navigation (Home, Poems, Stories, Essays, Contact) with section switching via JS",
+      "summary": "Add the provided story \"আশ্রয়হীন\" to the গল্প (Stories) category with the given full Bengali content.",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Per-section comments UI (forms + comments list) for Home/Poems/Stories/Essays",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Contact page with displayed email and contact form (name/email/message)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Integrate Google Translate widget (google_translate_element) for on-page translation",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-5",
-      "summary": "Nature-inspired floral aesthetic with hero image banner on each section",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-6",
-      "summary": "SEO/social metadata setup (description/keywords/OG tags/canonical) for the site",
+      "summary": "Change/update the app's contact email (mail id) to shovangoswami6@gmail.com.",
       "reqIds": [],
       "status": "pending"
     }
   ],
   "gameProjectType": "none",
-  "projectName": "আমার ঘুমন্ত ভিলা (Amar Ghumontovilla)",
+  "projectName": "Add provided Bengali story to Stories section and update contact email address",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

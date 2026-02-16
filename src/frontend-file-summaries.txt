@@ -1,9 +1,9 @@
 {
-  "frontend/src/App.tsx": "Main application component managing section navigation state and rendering the single-page literary portal with Home, Poems, Stories, Essays, and Contact sections, including header, footer with attribution using lucide-react Heart icon, and translate widget.",
+  "frontend/src/App.tsx": "Main application component managing section navigation state and rendering the single-page literary portal with Home, Poems, Stories (now featuring the complete Bengali story \"আশ্রয়হীন\"), Essays, and Contact sections, including header, footer with attribution using lucide-react Heart icon, and translate widget.",
   "frontend/src/components/TopNav.tsx": "Sticky navigation header component with desktop and mobile responsive menu, displaying section links with active state highlighting and smooth scrolling.",
   "frontend/src/components/SectionHero.tsx": "Reusable hero banner component displaying the floral background image with title, subtitle, and description overlay for each section.",
   "frontend/src/components/CommentsSection.tsx": "Per-section comments component with form (author name + content textarea) and comments list, integrating with backend via React Query for loading and submitting comments.",
-  "frontend/src/components/ContactSection.tsx": "Contact section displaying email address and validated contact form (name, email, message) with success state and backend integration.",
+  "frontend/src/components/ContactSection.tsx": "Contact section displaying the updated email address (shovangoswami6@gmail.com) with mailto link and validated contact form (name, email, message) with success state and backend integration.",
   "frontend/src/components/TranslateWidget.tsx": "Google Translate widget integration component that loads the translate script and renders the translation selector with error-safe initialization.",
   "frontend/src/hooks/useSectionComments.ts": "React Query hook managing per-section comment fetching and submission with automatic cache invalidation.",
   "frontend/src/hooks/useContactForm.ts": "React Query mutation hook for contact form submission with success state management.",

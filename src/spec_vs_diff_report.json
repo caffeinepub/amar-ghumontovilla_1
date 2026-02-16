@@ -1,58 +1,55 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-15T04:21:32.983Z",
-  "summary": "Most core UI requirements appear implemented: SPA navigation across five sections with active highlighting, reusable hero component using local floral hero image, per-section comments UI wired to backend, contact form with validation/success state, Google Translate widget container/script loader, and SEO metadata in frontend/index.html. However, required generated static image assets are not shown as added, and some extra authentication/contact-retrieval plumbing was added beyond the request.",
+  "generatedAt": "2026-02-16T12:53:45.279Z",
+  "summary": "REQ-2 (contact email text + mailto) appears implemented. REQ-1 is only partially evidenced: the story title spelling in the diff does not exactly match the requested title, and the diff is truncated so the full provided Bengali story body (with no omissions/edits) and continued presence/functionality of the Stories comments component cannot be fully verified from the supplied evidence.",
   "missing_requirements": [
     {
-      "id": "REQ-8",
-      "requirement": "Generate and include required static images in the app under frontend/public/assets/generated and use them in the UI (hero image and optional background pattern) instead of hotlinking external images.",
-      "reason": "The code references local assets under /assets/generated (hero and background pattern), but the diff summary does not show any new files added under frontend/public/assets/generated, which is explicitly required by the spec.",
+      "id": "REQ-1",
+      "requirement": "Use the exact Bengali story title “আশ্রয়হীন” in the Stories (গল্প) section.",
+      "reason": "The title shown in the diff uses a different Bengali character sequence: “আশ্রয়হীন” (with য়) instead of the requested “আশ্রয়হীন” (with য়), so it does not meet the 'exact title' acceptance criteria.",
       "evidence": [
-        "frontend/src/components/SectionHero.tsx (references /assets/generated/flower-bouquet-hero.dim_1920x800.png)",
-        "frontend/src/index.css (references /assets/generated/floral-pattern-bg.dim_1024x1024.png)",
-        "frontend/index.html (og:image points to /assets/generated/flower-bouquet-hero.dim_1920x800.png)"
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-1",
+      "requirement": "Render the full provided Bengali story body text with no omissions/edits and preserve paragraph breaks; keep the existing Stories comments component present and functional.",
+      "reason": "The Stories content shown in the diff is truncated (ends with \"... [truncated]\"), so it is not possible to verify that the full provided story body text is included without omissions/edits, nor to confirm from the snippet that the Stories comments component remains present and functional.",
+      "evidence": [
+        "frontend/src/App.tsx"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Internet Identity authentication context/hooks and actor recreation logic added (login/identity management) despite authentication not being required for this build.",
-      "reason": "BuildRequest does not request login/authentication; it only restricts providers if authentication is later needed. The diff adds a full Internet Identity provider/hook stack.",
+      "description": "Added/changed contact form validation UX (email regex validation and inline error messaging) beyond just updating the displayed contact email address.",
+      "reason": "BuildRequest explicitly says not to change contact form submission behavior beyond updating the displayed email address. The diff shows added validation state and messages (e.g., emailError, validateEmail, \"Please enter a valid email address\"), which is additional behavior.",
       "evidence": [
-        "frontend/src/hooks/useInternetIdentity.ts",
-        "frontend/src/hooks/useActor.ts",
-        "frontend/src/main.tsx"
+        "frontend/src/components/ContactSection.tsx"
       ]
     },
     {
-      "description": "Backend API to retrieve contact messages (getContactMessages) implemented.",
-      "reason": "REQ-4 requires persisting contact submissions and showing UI success state, but does not request any endpoint to list/retrieve stored messages.",
+      "description": "Translate widget integration and footer attribution/Heart icon additions in the main App component.",
+      "reason": "Not requested by REQ-1/REQ-2; the BuildRequest scope is limited to Stories content replacement and Contact email update.",
       "evidence": [
-        "backend/main.mo (public query func getContactMessages)"
+        "frontend/src/App.tsx",
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "description": "SEO metadata described as 'complete SEO metadata' (OG tags/canonical/etc.).",
+      "reason": "BuildRequest non-goal says not to change SEO metadata unless explicitly required for the email update; the diff summary references SEO metadata changes/additions, which are out of scope based on the request.",
+      "evidence": [
+        "frontend-file-summaries.txt"
       ]
     }
   ],
-  "confidence": 0.74,
+  "confidence": 0.64,
   "changed_files": [
-    "all_files_summary.json",
-    "backend/main.mo",
     "frontend-file-summaries.txt",
-    "frontend/index.css",
-    "frontend/index.html",
     "frontend/src/App.tsx",
-    "frontend/src/components/CommentsSection.tsx",
     "frontend/src/components/ContactSection.tsx",
-    "frontend/src/components/SectionHero.tsx",
-    "frontend/src/components/TopNav.tsx",
-    "frontend/src/components/TranslateWidget.tsx",
-    "frontend/src/hooks/useActor.ts",
-    "frontend/src/hooks/useContactForm.ts",
-    "frontend/src/hooks/useInternetIdentity.ts",
-    "frontend/src/hooks/useSectionComments.ts",
-    "frontend/src/index.css",
-    "frontend/src/main.tsx",
-    "frontend/tailwind.config.js",
     "project_state.json"
   ]
 }
