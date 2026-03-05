@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Mail, Loader2, CheckCircle2 } from 'lucide-react';
-import { useContactForm } from '../hooks/useContactForm';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { CheckCircle2, Loader2, Mail } from "lucide-react";
+import { useState } from "react";
+import { useContactForm } from "../hooks/useContactForm";
 
 export default function ContactSection() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const { submitMessage, isSubmitting, isSuccess } = useContactForm();
 
@@ -24,32 +24,36 @@ export default function ContactSection() {
   const handleEmailChange = (value: string) => {
     setEmail(value);
     if (value && !validateEmail(value)) {
-      setEmailError('Please enter a valid email address');
+      setEmailError("Please enter a valid email address");
     } else {
-      setEmailError('');
+      setEmailError("");
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!name.trim() || !email.trim() || !message.trim()) {
       return;
     }
 
     if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address');
+      setEmailError("Please enter a valid email address");
       return;
     }
 
     try {
-      await submitMessage({ name: name.trim(), email: email.trim(), message: message.trim() });
-      setName('');
-      setEmail('');
-      setMessage('');
-      setEmailError('');
+      await submitMessage({
+        name: name.trim(),
+        email: email.trim(),
+        message: message.trim(),
+      });
+      setName("");
+      setEmail("");
+      setMessage("");
+      setEmailError("");
     } catch (error) {
-      console.error('Failed to send message:', error);
+      console.error("Failed to send message:", error);
     }
   };
 
@@ -60,8 +64,8 @@ export default function ContactSection() {
           <div className="flex items-center gap-3 text-lg">
             <Mail className="text-primary" size={24} />
             <span className="font-medium">Email:</span>
-            <a 
-              href="mailto:shovangoswami6@gmail.com" 
+            <a
+              href="mailto:shovangoswami6@gmail.com"
               className="text-primary hover:underline font-semibold"
             >
               shovangoswami6@gmail.com
@@ -128,9 +132,15 @@ export default function ContactSection() {
                 />
               </div>
 
-              <Button 
-                type="submit" 
-                disabled={isSubmitting || !name.trim() || !email.trim() || !message.trim() || !!emailError}
+              <Button
+                type="submit"
+                disabled={
+                  isSubmitting ||
+                  !name.trim() ||
+                  !email.trim() ||
+                  !message.trim() ||
+                  !!emailError
+                }
                 className="w-full sm:w-auto"
                 size="lg"
               >
@@ -140,7 +150,7 @@ export default function ContactSection() {
                     Sending...
                   </>
                 ) : (
-                  'Send Message'
+                  "Send Message"
                 )}
               </Button>
             </form>

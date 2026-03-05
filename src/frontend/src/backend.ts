@@ -95,25 +95,82 @@ export interface Message {
     message: string;
     timestamp: bigint;
 }
+export interface LiteraryContent {
+    id: string;
+    title: string;
+    content: string;
+    isPublished: boolean;
+    author: Principal;
+    timestamp: bigint;
+}
 export interface Comment {
     content: string;
     author: string;
     timestamp: bigint;
 }
-export interface backendInterface {
-    addContactMessage(name: string, email: string, message: string): Promise<void>;
-    addEssaysComment(author: string, content: string): Promise<void>;
-    addHomeComment(author: string, content: string): Promise<void>;
-    addPoemsComment(author: string, content: string): Promise<void>;
-    addStoriesComment(author: string, content: string): Promise<void>;
-    getContactMessages(): Promise<Array<Message>>;
-    getEssaysComments(): Promise<Array<Comment>>;
-    getHomeComments(): Promise<Array<Comment>>;
-    getPoemsComments(): Promise<Array<Comment>>;
-    getStoriesComments(): Promise<Array<Comment>>;
+export interface UserProfile {
+    name: string;
 }
+export enum UserRole {
+    admin = "admin",
+    user = "user",
+    guest = "guest"
+}
+export interface backendInterface {
+    _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
+    addComment(section: string, author: string, content: string): Promise<void>;
+    addContactMessage(name: string, email: string, message: string): Promise<void>;
+    assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
+    createDraft(title: string, content: string): Promise<string>;
+    deleteContent(id: string): Promise<void>;
+    getCallerUserProfile(): Promise<UserProfile | null>;
+    getCallerUserRole(): Promise<UserRole>;
+    getComments(section: string): Promise<Array<Comment>>;
+    getContactMessages(): Promise<Array<Message>>;
+    getContentById(id: string): Promise<LiteraryContent | null>;
+    getDailyVisits(day: bigint): Promise<bigint>;
+    getDrafts(): Promise<Array<LiteraryContent>>;
+    getPublishedContent(): Promise<Array<LiteraryContent>>;
+    getTotalVisits(): Promise<bigint>;
+    getUserProfile(user: Principal): Promise<UserProfile | null>;
+    isCallerAdmin(): Promise<boolean>;
+    publishContent(id: string): Promise<void>;
+    recordVisit(): Promise<void>;
+    saveCallerUserProfile(profile: UserProfile): Promise<void>;
+    unpublishContent(id: string): Promise<void>;
+    updateDraft(id: string, title: string, content: string): Promise<void>;
+}
+import type { LiteraryContent as _LiteraryContent, UserProfile as _UserProfile, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async _initializeAccessControlWithSecret(arg0: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor._initializeAccessControlWithSecret(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor._initializeAccessControlWithSecret(arg0);
+            return result;
+        }
+    }
+    async addComment(arg0: string, arg1: string, arg2: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addComment(arg0, arg1, arg2);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addComment(arg0, arg1, arg2);
+            return result;
+        }
+    }
     async addContactMessage(arg0: string, arg1: string, arg2: string): Promise<void> {
         if (this.processError) {
             try {
@@ -128,59 +185,87 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async addEssaysComment(arg0: string, arg1: string): Promise<void> {
+    async assignCallerUserRole(arg0: Principal, arg1: UserRole): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.addEssaysComment(arg0, arg1);
+                const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n1(this._uploadFile, this._downloadFile, arg1));
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.addEssaysComment(arg0, arg1);
+            const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n1(this._uploadFile, this._downloadFile, arg1));
             return result;
         }
     }
-    async addHomeComment(arg0: string, arg1: string): Promise<void> {
+    async createDraft(arg0: string, arg1: string): Promise<string> {
         if (this.processError) {
             try {
-                const result = await this.actor.addHomeComment(arg0, arg1);
+                const result = await this.actor.createDraft(arg0, arg1);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.addHomeComment(arg0, arg1);
+            const result = await this.actor.createDraft(arg0, arg1);
             return result;
         }
     }
-    async addPoemsComment(arg0: string, arg1: string): Promise<void> {
+    async deleteContent(arg0: string): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.addPoemsComment(arg0, arg1);
+                const result = await this.actor.deleteContent(arg0);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.addPoemsComment(arg0, arg1);
+            const result = await this.actor.deleteContent(arg0);
             return result;
         }
     }
-    async addStoriesComment(arg0: string, arg1: string): Promise<void> {
+    async getCallerUserProfile(): Promise<UserProfile | null> {
         if (this.processError) {
             try {
-                const result = await this.actor.addStoriesComment(arg0, arg1);
+                const result = await this.actor.getCallerUserProfile();
+                return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getCallerUserProfile();
+            return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getCallerUserRole(): Promise<UserRole> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getCallerUserRole();
+                return from_candid_UserRole_n4(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getCallerUserRole();
+            return from_candid_UserRole_n4(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getComments(arg0: string): Promise<Array<Comment>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getComments(arg0);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.addStoriesComment(arg0, arg1);
+            const result = await this.actor.getComments(arg0);
             return result;
         }
     }
@@ -198,62 +283,210 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async getEssaysComments(): Promise<Array<Comment>> {
+    async getContentById(arg0: string): Promise<LiteraryContent | null> {
         if (this.processError) {
             try {
-                const result = await this.actor.getEssaysComments();
+                const result = await this.actor.getContentById(arg0);
+                return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getContentById(arg0);
+            return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getDailyVisits(arg0: bigint): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getDailyVisits(arg0);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.getEssaysComments();
+            const result = await this.actor.getDailyVisits(arg0);
             return result;
         }
     }
-    async getHomeComments(): Promise<Array<Comment>> {
+    async getDrafts(): Promise<Array<LiteraryContent>> {
         if (this.processError) {
             try {
-                const result = await this.actor.getHomeComments();
+                const result = await this.actor.getDrafts();
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.getHomeComments();
+            const result = await this.actor.getDrafts();
             return result;
         }
     }
-    async getPoemsComments(): Promise<Array<Comment>> {
+    async getPublishedContent(): Promise<Array<LiteraryContent>> {
         if (this.processError) {
             try {
-                const result = await this.actor.getPoemsComments();
+                const result = await this.actor.getPublishedContent();
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.getPoemsComments();
+            const result = await this.actor.getPublishedContent();
             return result;
         }
     }
-    async getStoriesComments(): Promise<Array<Comment>> {
+    async getTotalVisits(): Promise<bigint> {
         if (this.processError) {
             try {
-                const result = await this.actor.getStoriesComments();
+                const result = await this.actor.getTotalVisits();
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.getStoriesComments();
+            const result = await this.actor.getTotalVisits();
             return result;
         }
     }
+    async getUserProfile(arg0: Principal): Promise<UserProfile | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getUserProfile(arg0);
+                return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getUserProfile(arg0);
+            return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async isCallerAdmin(): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.isCallerAdmin();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.isCallerAdmin();
+            return result;
+        }
+    }
+    async publishContent(arg0: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.publishContent(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.publishContent(arg0);
+            return result;
+        }
+    }
+    async recordVisit(): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.recordVisit();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.recordVisit();
+            return result;
+        }
+    }
+    async saveCallerUserProfile(arg0: UserProfile): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.saveCallerUserProfile(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.saveCallerUserProfile(arg0);
+            return result;
+        }
+    }
+    async unpublishContent(arg0: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.unpublishContent(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.unpublishContent(arg0);
+            return result;
+        }
+    }
+    async updateDraft(arg0: string, arg1: string, arg2: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateDraft(arg0, arg1, arg2);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateDraft(arg0, arg1, arg2);
+            return result;
+        }
+    }
+}
+function from_candid_UserRole_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _UserRole): UserRole {
+    return from_candid_variant_n5(_uploadFile, _downloadFile, value);
+}
+function from_candid_opt_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_UserProfile]): UserProfile | null {
+    return value.length === 0 ? null : value[0];
+}
+function from_candid_opt_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_LiteraryContent]): LiteraryContent | null {
+    return value.length === 0 ? null : value[0];
+}
+function from_candid_variant_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    admin: null;
+} | {
+    user: null;
+} | {
+    guest: null;
+}): UserRole {
+    return "admin" in value ? UserRole.admin : "user" in value ? UserRole.user : "guest" in value ? UserRole.guest : value;
+}
+function to_candid_UserRole_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): _UserRole {
+    return to_candid_variant_n2(_uploadFile, _downloadFile, value);
+}
+function to_candid_variant_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): {
+    admin: null;
+} | {
+    user: null;
+} | {
+    guest: null;
+} {
+    return value == UserRole.admin ? {
+        admin: null
+    } : value == UserRole.user ? {
+        user: null
+    } : value == UserRole.guest ? {
+        guest: null
+    } : value;
 }
 export interface CreateActorOptions {
     agent?: Agent;

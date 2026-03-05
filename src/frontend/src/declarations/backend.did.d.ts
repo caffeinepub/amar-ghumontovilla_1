@@ -15,23 +15,47 @@ export interface Comment {
   'author' : string,
   'timestamp' : bigint,
 }
+export interface LiteraryContent {
+  'id' : string,
+  'title' : string,
+  'content' : string,
+  'isPublished' : boolean,
+  'author' : Principal,
+  'timestamp' : bigint,
+}
 export interface Message {
   'name' : string,
   'email' : string,
   'message' : string,
   'timestamp' : bigint,
 }
+export interface UserProfile { 'name' : string }
+export type UserRole = { 'admin' : null } |
+  { 'user' : null } |
+  { 'guest' : null };
 export interface _SERVICE {
+  '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  'addComment' : ActorMethod<[string, string, string], undefined>,
   'addContactMessage' : ActorMethod<[string, string, string], undefined>,
-  'addEssaysComment' : ActorMethod<[string, string], undefined>,
-  'addHomeComment' : ActorMethod<[string, string], undefined>,
-  'addPoemsComment' : ActorMethod<[string, string], undefined>,
-  'addStoriesComment' : ActorMethod<[string, string], undefined>,
+  'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'createDraft' : ActorMethod<[string, string], string>,
+  'deleteContent' : ActorMethod<[string], undefined>,
+  'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
+  'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getComments' : ActorMethod<[string], Array<Comment>>,
   'getContactMessages' : ActorMethod<[], Array<Message>>,
-  'getEssaysComments' : ActorMethod<[], Array<Comment>>,
-  'getHomeComments' : ActorMethod<[], Array<Comment>>,
-  'getPoemsComments' : ActorMethod<[], Array<Comment>>,
-  'getStoriesComments' : ActorMethod<[], Array<Comment>>,
+  'getContentById' : ActorMethod<[string], [] | [LiteraryContent]>,
+  'getDailyVisits' : ActorMethod<[bigint], bigint>,
+  'getDrafts' : ActorMethod<[], Array<LiteraryContent>>,
+  'getPublishedContent' : ActorMethod<[], Array<LiteraryContent>>,
+  'getTotalVisits' : ActorMethod<[], bigint>,
+  'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
+  'isCallerAdmin' : ActorMethod<[], boolean>,
+  'publishContent' : ActorMethod<[string], undefined>,
+  'recordVisit' : ActorMethod<[], undefined>,
+  'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
+  'unpublishContent' : ActorMethod<[string], undefined>,
+  'updateDraft' : ActorMethod<[string, string, string], undefined>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

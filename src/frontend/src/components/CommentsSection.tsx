@@ -1,52 +1,53 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, MessageSquare } from 'lucide-react';
-import { useSectionComments } from '../hooks/useSectionComments';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Loader2, MessageSquare } from "lucide-react";
+import { useState } from "react";
+import { useSectionComments } from "../hooks/useSectionComments";
 
-type Section = 'home' | 'poems' | 'stories' | 'essays';
+type Section = "home" | "poems" | "stories" | "essays";
 
 interface CommentsSectionProps {
   section: Section;
 }
 
 export default function CommentsSection({ section }: CommentsSectionProps) {
-  const [author, setAuthor] = useState('');
-  const [content, setContent] = useState('');
+  const [author, setAuthor] = useState("");
+  const [content, setContent] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const { comments, isLoading, addComment, isAddingComment } = useSectionComments(section);
+  const { comments, isLoading, addComment, isAddingComment } =
+    useSectionComments(section);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!author.trim() || !content.trim()) {
       return;
     }
 
     try {
       await addComment({ author: author.trim(), content: content.trim() });
-      setAuthor('');
-      setContent('');
+      setAuthor("");
+      setContent("");
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
     } catch (error) {
-      console.error('Failed to add comment:', error);
+      console.error("Failed to add comment:", error);
     }
   };
 
   const formatDate = (timestamp: bigint) => {
     const date = new Date(Number(timestamp) / 1000000);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -73,7 +74,7 @@ export default function CommentsSection({ section }: CommentsSectionProps) {
                 className="bg-background/50"
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor={`comment-${section}`}>Comment</Label>
               <Textarea
@@ -96,8 +97,8 @@ export default function CommentsSection({ section }: CommentsSectionProps) {
               </Alert>
             )}
 
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={isAddingComment || !author.trim() || !content.trim()}
               className="w-full sm:w-auto"
             >
@@ -107,7 +108,7 @@ export default function CommentsSection({ section }: CommentsSectionProps) {
                   Submitting...
                 </>
               ) : (
-                'Submit Comment'
+                "Submit Comment"
               )}
             </Button>
           </form>
@@ -116,9 +117,9 @@ export default function CommentsSection({ section }: CommentsSectionProps) {
 
       <div className="space-y-4">
         <h3 className="text-xl font-semibold text-foreground">
-          {comments.length} {comments.length === 1 ? 'Comment' : 'Comments'}
+          {comments.length} {comments.length === 1 ? "Comment" : "Comments"}
         </h3>
-        
+
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -132,10 +133,15 @@ export default function CommentsSection({ section }: CommentsSectionProps) {
         ) : (
           <div className="space-y-4">
             {comments.map((comment, index) => (
-              <Card key={index} className="bg-card/50 backdrop-blur-sm border-border/50">
+              <Card
+                key={`${comment.author}-${comment.timestamp}-${index}`}
+                className="bg-card/50 backdrop-blur-sm border-border/50"
+              >
                 <CardContent className="pt-6">
                   <div className="flex items-start justify-between gap-4 mb-3">
-                    <p className="font-semibold text-primary">{comment.author}</p>
+                    <p className="font-semibold text-primary">
+                      {comment.author}
+                    </p>
                     <time className="text-sm text-muted-foreground whitespace-nowrap">
                       {formatDate(comment.timestamp)}
                     </time>

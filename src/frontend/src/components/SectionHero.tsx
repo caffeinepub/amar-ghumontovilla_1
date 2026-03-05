@@ -4,7 +4,11 @@ interface SectionHeroProps {
   description?: string;
 }
 
-export default function SectionHero({ title, subtitle, description }: SectionHeroProps) {
+export default function SectionHero({
+  title,
+  subtitle,
+  description,
+}: SectionHeroProps) {
   return (
     <div className="relative w-full overflow-hidden bg-gradient-to-br from-primary/5 via-accent/10 to-secondary/5">
       <div className="absolute inset-0">
@@ -15,7 +19,7 @@ export default function SectionHero({ title, subtitle, description }: SectionHer
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
       </div>
-      
+
       <div className="relative container mx-auto px-4 py-16 md:py-24 lg:py-32">
         <div className="max-w-4xl mx-auto text-center space-y-4">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary drop-shadow-sm font-bengali">

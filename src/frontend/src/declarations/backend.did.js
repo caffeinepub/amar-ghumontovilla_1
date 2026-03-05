@@ -8,57 +8,125 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const UserRole = IDL.Variant({
+  'admin' : IDL.Null,
+  'user' : IDL.Null,
+  'guest' : IDL.Null,
+});
+export const UserProfile = IDL.Record({ 'name' : IDL.Text });
+export const Comment = IDL.Record({
+  'content' : IDL.Text,
+  'author' : IDL.Text,
+  'timestamp' : IDL.Int,
+});
 export const Message = IDL.Record({
   'name' : IDL.Text,
   'email' : IDL.Text,
   'message' : IDL.Text,
   'timestamp' : IDL.Int,
 });
-export const Comment = IDL.Record({
+export const LiteraryContent = IDL.Record({
+  'id' : IDL.Text,
+  'title' : IDL.Text,
   'content' : IDL.Text,
-  'author' : IDL.Text,
+  'isPublished' : IDL.Bool,
+  'author' : IDL.Principal,
   'timestamp' : IDL.Int,
 });
 
 export const idlService = IDL.Service({
+  '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'addComment' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
   'addContactMessage' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
-  'addEssaysComment' : IDL.Func([IDL.Text, IDL.Text], [], []),
-  'addHomeComment' : IDL.Func([IDL.Text, IDL.Text], [], []),
-  'addPoemsComment' : IDL.Func([IDL.Text, IDL.Text], [], []),
-  'addStoriesComment' : IDL.Func([IDL.Text, IDL.Text], [], []),
+  'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'createDraft' : IDL.Func([IDL.Text, IDL.Text], [IDL.Text], []),
+  'deleteContent' : IDL.Func([IDL.Text], [], []),
+  'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+  'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getComments' : IDL.Func([IDL.Text], [IDL.Vec(Comment)], ['query']),
   'getContactMessages' : IDL.Func([], [IDL.Vec(Message)], ['query']),
-  'getEssaysComments' : IDL.Func([], [IDL.Vec(Comment)], ['query']),
-  'getHomeComments' : IDL.Func([], [IDL.Vec(Comment)], ['query']),
-  'getPoemsComments' : IDL.Func([], [IDL.Vec(Comment)], ['query']),
-  'getStoriesComments' : IDL.Func([], [IDL.Vec(Comment)], ['query']),
+  'getContentById' : IDL.Func(
+      [IDL.Text],
+      [IDL.Opt(LiteraryContent)],
+      ['query'],
+    ),
+  'getDailyVisits' : IDL.Func([IDL.Int], [IDL.Nat], ['query']),
+  'getDrafts' : IDL.Func([], [IDL.Vec(LiteraryContent)], ['query']),
+  'getPublishedContent' : IDL.Func([], [IDL.Vec(LiteraryContent)], ['query']),
+  'getTotalVisits' : IDL.Func([], [IDL.Nat], ['query']),
+  'getUserProfile' : IDL.Func(
+      [IDL.Principal],
+      [IDL.Opt(UserProfile)],
+      ['query'],
+    ),
+  'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+  'publishContent' : IDL.Func([IDL.Text], [], []),
+  'recordVisit' : IDL.Func([], [], []),
+  'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+  'unpublishContent' : IDL.Func([IDL.Text], [], []),
+  'updateDraft' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const UserRole = IDL.Variant({
+    'admin' : IDL.Null,
+    'user' : IDL.Null,
+    'guest' : IDL.Null,
+  });
+  const UserProfile = IDL.Record({ 'name' : IDL.Text });
+  const Comment = IDL.Record({
+    'content' : IDL.Text,
+    'author' : IDL.Text,
+    'timestamp' : IDL.Int,
+  });
   const Message = IDL.Record({
     'name' : IDL.Text,
     'email' : IDL.Text,
     'message' : IDL.Text,
     'timestamp' : IDL.Int,
   });
-  const Comment = IDL.Record({
+  const LiteraryContent = IDL.Record({
+    'id' : IDL.Text,
+    'title' : IDL.Text,
     'content' : IDL.Text,
-    'author' : IDL.Text,
+    'isPublished' : IDL.Bool,
+    'author' : IDL.Principal,
     'timestamp' : IDL.Int,
   });
   
   return IDL.Service({
+    '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'addComment' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
     'addContactMessage' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
-    'addEssaysComment' : IDL.Func([IDL.Text, IDL.Text], [], []),
-    'addHomeComment' : IDL.Func([IDL.Text, IDL.Text], [], []),
-    'addPoemsComment' : IDL.Func([IDL.Text, IDL.Text], [], []),
-    'addStoriesComment' : IDL.Func([IDL.Text, IDL.Text], [], []),
+    'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'createDraft' : IDL.Func([IDL.Text, IDL.Text], [IDL.Text], []),
+    'deleteContent' : IDL.Func([IDL.Text], [], []),
+    'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+    'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getComments' : IDL.Func([IDL.Text], [IDL.Vec(Comment)], ['query']),
     'getContactMessages' : IDL.Func([], [IDL.Vec(Message)], ['query']),
-    'getEssaysComments' : IDL.Func([], [IDL.Vec(Comment)], ['query']),
-    'getHomeComments' : IDL.Func([], [IDL.Vec(Comment)], ['query']),
-    'getPoemsComments' : IDL.Func([], [IDL.Vec(Comment)], ['query']),
-    'getStoriesComments' : IDL.Func([], [IDL.Vec(Comment)], ['query']),
+    'getContentById' : IDL.Func(
+        [IDL.Text],
+        [IDL.Opt(LiteraryContent)],
+        ['query'],
+      ),
+    'getDailyVisits' : IDL.Func([IDL.Int], [IDL.Nat], ['query']),
+    'getDrafts' : IDL.Func([], [IDL.Vec(LiteraryContent)], ['query']),
+    'getPublishedContent' : IDL.Func([], [IDL.Vec(LiteraryContent)], ['query']),
+    'getTotalVisits' : IDL.Func([], [IDL.Nat], ['query']),
+    'getUserProfile' : IDL.Func(
+        [IDL.Principal],
+        [IDL.Opt(UserProfile)],
+        ['query'],
+      ),
+    'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+    'publishContent' : IDL.Func([IDL.Text], [], []),
+    'recordVisit' : IDL.Func([], [], []),
+    'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+    'unpublishContent' : IDL.Func([IDL.Text], [], []),
+    'updateDraft' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
   });
 };
 
